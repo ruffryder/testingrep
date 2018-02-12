@@ -5,7 +5,7 @@
     <h1>Edit User</h1>
     <div class="row">
         <div class="col-sm-3">
-            <img src="{{$user->photo ? $user->photo->path : 'No Image Present'}}" alt="User Photo" class="img-responsive img-rounded">
+            <img src="{{$user->photo ? "../../..".$user->photo->path : 'No Image Present'}}" alt="User Photo" class="img-responsive img-rounded">
         </div>
         <div class="col-sm-9">
             {!! Form::model($user, ['method'=>'PATCH', 'action'=> ['AdminUsersController@update', $user->id], 'files'=>true]) !!}
@@ -34,9 +34,18 @@
                 {!! Form::select('role_id',[''=>'Choose Options']+$roles, null, ['class'=>'form-control'])!!}
             </div>
             <div class="form-group">
-                {!! Form::submit('Update User', ['class'=>'btn btn-primary ']) !!}
+                {!! Form::submit('Update User', ['class'=>'btn btn-primary col-sm-4']) !!}
             </div>
             {!! Form::close() !!}
+
+            {!! Form::open(['method'=>'DELETE', 'action'=>['AdminUsersController@destroy',$user->id]]) !!}
+
+            <div class="form-group">
+                {!! Form::submit('Delete User', ['class'=>'btn btn-danger col-sm-4']) !!}
+            </div>
+
+            {!! Form::close() !!}
+
         </div>
     </div>
     <div class="row">
